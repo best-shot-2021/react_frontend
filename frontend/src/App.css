@@ -2,11 +2,13 @@
 
 .Home1 {
   text-align: center;
+  background-color: #009BDD;
+  color: #4499D7;
 }
 
 .Background {
   height: 100vmin;
-  width: 90vmin;
+  width: 100;
   pointer-events: none;
 }
 
@@ -16,20 +18,11 @@
   }
 } */
 
-  /* html { 
-    background: url("./assets/images/home_img1.png") no-repeat center center fixed; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-  } */
-
 .Home1-header {
   /* background-image: url("./assets/images/yumi_insta.png"); */
   background-size: contain;
   background-repeat: no-repeat;
   background-attachment: local;
-  background-color: #00A0FE;
   max-width: 100%;
   width: 100%;
   height: auto;
@@ -43,7 +36,7 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color: #4499D7;
 }
 
 @keyframes App-logo-spin {
@@ -63,7 +56,6 @@
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
 }
