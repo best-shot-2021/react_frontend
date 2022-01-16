@@ -23,6 +23,7 @@ const theme = {
   userFontColor: '#4a4a4a',
 };
 
+var faceResult=null;
 
 class Review extends Component {
   constructor(props) {
@@ -111,80 +112,56 @@ class InputBox extends Component{
     );
   }
 }
-/*
-class inputFile extends Component{
 
-  constructor() {
-    super();
-    this.onChange = this.onChange.bind(this);
+
+class FaceImageSend extends Component {
+  constructor(props) {
+    super(props);
     this.state = {
-      files: [],
+      image: null,
+      send_image: null
     };
-  }
-/*
-  onChange(e) {
-    var files = e.target.files;
-    console.log(files);
-    var filesArr = Array.prototype.slice.call(files);
-    console.log(filesArr);
-    this.setState({ files: [...this.state.files, ...filesArr] });
-  }
-*//*
-  onChange = (e) => {
-    this.setImage(e.target.files[0]);
+
+    this.onImageChange = this.onImageChange.bind(this);
   }
 
-  onClick = async () => {
+  onImageChange = event => {
+    if (event.target.files && event.target.files[0]) {
+      let img = event.target.files[0];
+      this.setState({
+        image: URL.createObjectURL(img),
+        send_image: img
+      });
+    }
+  };
+
+  onClick = async() =>{
     const formData = new FormData();
-    formData.append('img_file', img);
-    // 서버의 upload API 호출
-    const res = await axios.post('http://192.249.18.213:80/face_classifier', formData)
+    formData.append('img_file', this.state.send_image);
+    axios.post('http://192.249.18.213:80/face_classifier', formData)
+    // .then((res)=>JSON.stringify(res))
     .then((res)=>{
       console.log(res);
-    });
+      faceResult = res['data'];
+      console.log(faceResult);
+    })  
+
   }
-
   render() {
-    const [img, setImage] = useState({});
-    /*
-    const onChange = (e) => {
-      this.setImage(e.target.files[0]);
-    }
-    }
     return (
-      <div className="App">
-
-        <input type='file' 
-          accept='image/*'  
-          onChange={this.onChange}>
-        </input>
-        <button onClick={this.onClick}>제출</button>
-      
+      <div>
+        <div>
+          <div>
+            <img src={this.state.image} />
+            <h1>Select Image</h1>
+            <input type="file" name="myImage" onChange={this.onImageChange} />
+            <button onClick={this.onClick}>Upload </button>
+          </div>
+        </div>
       </div>
     );
-
   }
 }
-*/
-// class input extends Component{
-
-//   uploadFile(e) {
-//     e.preventDefault();
-//     let file = this.state.fileToBeSent;
-//     const formData = new FormData();
-  
-//     formData.append("file", file);
-  
-//     axios
-//       .post("/api/upload", formData)
-//       .then(res => console.log(res))
-//       .catch(err => console.warn(err));
-//   }
-//   return(
-
-//);
-
-// }
 
 
 class InfoForm extends Component {
@@ -196,6 +173,7 @@ class InfoForm extends Component {
           placeholder=""
           hideUserAvatar="True"
           enableSmoothScroll="True"
+          customDelay= "50"
           //avatarStyle={}
         
           steps={[
@@ -307,21 +285,10 @@ class InfoForm extends Component {
               trigger: '10',
             },
             {
-              id: '10',
-              component:<ImagesUploader
-                            url="http://192.249.18.213:80/face_classifier"
-                            optimisticPreviews
-                            multiple={false}
-                            onLoadEnd={(err)=>{if(err){console.error(err);}}}
-                            label="Upload a picture"
-                            />,
-              trigger: 'end-message',
+                id: '10',
+                component:<FaceImageSend/>,
+                trigger: 'end-message',
             },
-
-
-
-
-
             {
               id: 'end-message',
               message: 'hi',
