@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import './App.css';
 import axios from 'axios';
 import ChatBot from 'react-simple-chatbot';
+import InfoForm from './components/InfoForm';
+import './index.css';
 
 
 function App() {
@@ -38,6 +40,7 @@ function App() {
     </div>*/
     <div>
       <ChatBot steps={steps} />
+      <InfoForm/>
     </div>
   );
 }
