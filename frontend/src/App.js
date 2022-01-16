@@ -4,9 +4,9 @@ import axios from 'axios';
 import ChatBot from 'react-simple-chatbot';
 import InfoForm from './components/InfoForm';
 import './index.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
 import Home from './Home';
-
+import About from './About';
 
 function App() {
   const [img, setImage] = useState({});
@@ -40,12 +40,24 @@ function App() {
       </input>
       <button onClick={onClick}>제출</button>
     </div>*/
-    
+    <div className="App">
+      
+
     <BrowserRouter>
+    <ul>
+        <li>
+          <Link to="/">홈</Link>
+        </li>
+        <li>
+          <Link to="/about">어바웃</Link>
+        </li>
+      </ul>
         <Routes>
           <Route exact path="/" element={<Home/>}></Route>
+          <Route exact path="/about" element={<About/>}></Route>
         </Routes>
-    </BrowserRouter>  
+    </BrowserRouter> 
+    </div> 
     
     // <div>
     //   <ChatBot steps={steps} />

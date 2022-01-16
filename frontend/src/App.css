@@ -1,21 +1,39 @@
-.App {
+
+
+.Home1 {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
+.Background {
+  height: 100vmin;
+  width: 90vmin;
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+/* @media (prefers-reduced-motion: no-preference) {
+  .Background {
+    animation: Background-spin infinite 20s linear;
   }
-}
+} */
 
-.App-header {
+  /* html { 
+    background: url("./assets/images/home_img1.png") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  } */
+
+.Home1-header {
+  /* background-image: url("./assets/images/yumi_insta.png"); */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-attachment: local;
   background-color: #282c34;
-  min-height: 100vh;
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  /* min-height: 100vh; */
   display: flex;
   flex-direction: column;
   align-items: center;
