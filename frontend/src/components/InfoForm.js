@@ -3,16 +3,18 @@ import PropTypes from 'prop-types';
 import ChatBot from 'react-simple-chatbot';
 import { ThemeProvider } from 'styled-components';
 import '../index.css';
+import background from '../assets/images/original.jpg';
+import chatbotimage from '../assets/images/chatbot.png';
 
 // all available props
 const theme = {
-  background: '../assets/images/original.jpg',
+  background: '#00a0fe',
   fontFamily: 'GodoM',
-  headerBgColor: '#EF6C00',
+  headerBgColor: '#79ccfe',
   headerFontColor: '#fff',
   headerFontSize: '15px',
-  botBubbleColor: '#EF6C00',
-  botFontColor: '#fff',
+  botBubbleColor: '#ffd74b',
+  botFontColor: '#000',
   userBubbleColor: '#fff',
   userFontColor: '#4a4a4a',
 };
@@ -44,15 +46,15 @@ class Review extends Component {
         <table>
           <tbody>
             <tr>
-              <td>Name</td>
+              <td>이름</td>
               <td>{name.value}</td>
             </tr>
             <tr>
-              <td>Gender</td>
+              <td>성별</td>
               <td>{gender.value}</td>
             </tr>
             <tr>
-              <td>Age</td>
+              <td>나이</td>
               <td>{age.value}</td>
             </tr>
           </tbody>
@@ -70,21 +72,66 @@ Review.defaultProps = {
   steps: undefined,
 };
 
+class InputBox extends Component{
+  constructor() {
+    super();
+    this.onChange = this.onChange.bind(this);
+    this.state = {
+      files: [],
+    };
+  }
+
+  onChange(e) {
+    var files = e.target.files;
+    console.log(files);
+    var filesArr = Array.prototype.slice.call(files);
+    console.log(filesArr);
+    this.setState({ files: [...this.state.files, ...filesArr] });
+  }
+  
+  removeFile(f) {
+       this.setState({ files: this.state.files.filter(x => x !== f) }); 
+  }
+
+  render() {
+    return (
+      <div>
+        <label className="custom-file-upload">
+          <input type="file" multiple onChange={this.onChange} />
+          <i className="fa fa-cloud-upload" /> Attach
+        </label>
+        {this.state.files.map(x => 
+           <div className="file-preview" onClick={this.removeFile.bind(this, x)}>{x.name}</div>
+         )}
+      </div>
+    );
+  }
+}
+
+
 class InfoForm extends Component {
   render() {
     return (
       <ThemeProvider theme={theme}>
-        <ChatBot
+        <ChatBot id="chat"
+        botAvatar={chatbotimage}
+        placeholder=""
+        hideUserAvatar="True"
+        enableSmoothScroll="True"
+        //avatarStyle={}
+      
         steps={[
           {
             id: '1',
             message: '이름이 뭐야?',
             trigger: 'name',
+            
           },
           {
             id: 'name',
             user: true,
             trigger: '3',
+            placeholder:"이름을 입력해줘"
           },
           {
             id: '3',
@@ -94,8 +141,8 @@ class InfoForm extends Component {
           {
             id: 'gender',
             options: [
-              { value: 'male', label: 'Male', trigger: '5' },
-              { value: 'female', label: 'Female', trigger: '5' },
+              { value: '남자', label: '남자', trigger: '5' },
+              { value: '여자', label: '여자', trigger: '5' },
             ],
           },
           {
@@ -107,6 +154,7 @@ class InfoForm extends Component {
             id: 'age',
             user: true,
             trigger: '7',
+            placeholder:"나이를 입력해줘",
             validator: (value) => {
               if (isNaN(value)) {
                 return 'value must be a number';
@@ -121,7 +169,12 @@ class InfoForm extends Component {
           },
           {
             id: '7',
-            message: 'Great! Check out your summary',
+            message: '좋아!',
+            trigger: '8',
+          },
+          {
+            id: '8',
+            message: '너의 정보를 확인해줄래?',
             trigger: 'review',
           },
           {
@@ -132,49 +185,72 @@ class InfoForm extends Component {
           },
           {
             id: 'update',
-            message: 'Would you like to update some field?',
+            message: '너의 정보가 맞아?',
             trigger: 'update-question',
           },
           {
             id: 'update-question',
             options: [
-              { value: 'yes', label: 'Yes', trigger: 'update-yes' },
-              { value: 'no', label: 'No', trigger: 'end-message' },
+              { value: '응 맞아!', label: '응 맞아!', trigger: '9' },
+              { value: '아니 고쳐줄래?', label: '아니 고쳐줄래?', trigger: 'update-yes' },
             ],
           },
           {
             id: 'update-yes',
-            message: 'What field would you like to update?',
+            message: '무슨 정보를 고쳐줄까?',
             trigger: 'update-fields',
           },
           {
             id: 'update-fields',
             options: [
-              { value: 'name', label: 'Name', trigger: 'update-name' },
-              { value: 'gender', label: 'Gender', trigger: 'update-gender' },
-              { value: 'age', label: 'Age', trigger: 'update-age' },
+              { value: '이름', label: '이름', trigger: 'update-name'},
+              { value: '성별', label: '성별', trigger: 'update-gender'},
+              { value: '나이', label: '나이', trigger: 'update-age' },
             ],
           },
           {
             id: 'update-name',
             update: 'name',
-            trigger: '7',
+            trigger: '8',
           },
           {
             id: 'update-gender',
             update: 'gender',
-            trigger: '7',
+            trigger: '8',
           },
           {
             id: 'update-age',
             update: 'age',
-            trigger: '7',
+            trigger: '8',
           },
           {
+            id: '9',
+            message: '좋았어! 이제 너의 얼굴을 보여주면 최고의 포토스팟을 찾아볼께!',
+            trigger: '10',
+          },
+          {
+            id: '10',
+            component:<InputBox/>,
+            message: '얼굴이 잘보이는 사진을 올려줘',
+            trigger: 'end-message',
+          },
+
+
+
+
+
+          {
             id: 'end-message',
-            message: 'Thanks! Your data was submitted successfully!',
+            message: 'hi',
             end: true,
           },
+
+
+
+
+
+
+
         ]}
       />
     </ThemeProvider>

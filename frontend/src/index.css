@@ -14,3 +14,8 @@ code {
 @font-face {
   font-family: 'GodoM'; src: url(./styles/fonts/GodoM.ttf) format('truetype'); 
 }
+
+.chat{
+  width: 3000;
+  height: 3000;
+}

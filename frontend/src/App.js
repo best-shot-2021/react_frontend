@@ -39,7 +39,6 @@ function App() {
       <button onClick={onClick}>제출</button>
     </div>*/
     <div>
-      <ChatBot steps={steps} />
       <InfoForm/>
     </div>
   );
