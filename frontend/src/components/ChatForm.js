@@ -1,27 +1,14 @@
-import React, { Component, useState } from 'react';
+import React, { Component,  useState } from 'react';
 import PropTypes from 'prop-types';
 import ChatBot from 'react-simple-chatbot';
 import { ThemeProvider } from 'styled-components';
 import '../index.css';
-import background from '../assets/images/original.jpg';
 import chatbotimage from '../assets/images/chatbot.png';
-import axios from 'axios';
-import ImagesUploader from 'react-images-uploader';
-import 'react-images-uploader/styles.css';
-import 'react-images-uploader/font.css';
+import FaceImageSend from './FaceImageSend';
+import VoiceSend from './VoiceSend';
+import {theme, avatarStyle} from '../styles/theme'
 
 // all available props
-const theme = {
-  background: '#00a0fe',
-  fontFamily: 'GodoM',
-  headerBgColor: '#79ccfe',
-  headerFontColor: '#fff',
-  headerFontSize: '15px',
-  botBubbleColor: '#ffd74b',
-  botFontColor: '#000',
-  userBubbleColor: '#fff',
-  userFontColor: '#4a4a4a',
-};
 
 var faceResult=null;
 
@@ -47,19 +34,19 @@ class Review extends Component {
     const { name, gender, age } = this.state;
     return (
       <div style={{ width: '100%' }}>
-        <h3>Summary</h3>
+        <h3>분석노트</h3>
         <table>
           <tbody>
             <tr>
-              <td>이름</td>
+              <td>이름 : </td>
               <td>{name.value}</td>
             </tr>
             <tr>
-              <td>성별</td>
+              <td>성별 : </td>
               <td>{gender.value}</td>
             </tr>
             <tr>
-              <td>나이</td>
+              <td>나이 : </td>
               <td>{age.value}</td>
             </tr>
           </tbody>
@@ -77,106 +64,36 @@ Review.defaultProps = {
   steps: undefined,
 };
 
-class InputBox extends Component{
-  constructor() {
-    super();
-    this.onChange = this.onChange.bind(this);
-    this.state = {
-      files: [],
-    };
-  }
+class ResultButton extends Component{
 
-  onChange(e) {
-    var files = e.target.files;
-    console.log(files);
-    var filesArr = Array.prototype.slice.call(files);
-    console.log(filesArr);
-    this.setState({ files: [...this.state.files, ...filesArr] });
-  }
-  
-  removeFile(f) {
-       this.setState({ files: this.state.files.filter(x => x !== f) }); 
-  }
-
-  render() {
-    return (
-      <div>
-        <label className="custom-file-upload">
-          <input type="file" multiple onChange={this.onChange} />
-          <i className="fa fa-cloud-upload" /> Attach
-        </label>
-        {this.state.files.map(x => 
-           <div className="file-preview" onClick={this.removeFile.bind(this, x)}>{x.name}</div>
-         )}
-      </div>
-    );
-  }
 }
 
 
-class FaceImageSend extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      image: null,
-      send_image: null
-    };
-
-    this.onImageChange = this.onImageChange.bind(this);
-  }
-
-  onImageChange = event => {
-    if (event.target.files && event.target.files[0]) {
-      let img = event.target.files[0];
-      this.setState({
-        image: URL.createObjectURL(img),
-        send_image: img
-      });
-    }
-  };
-
-  onClick = async() =>{
-    const formData = new FormData();
-    formData.append('img_file', this.state.send_image);
-    axios.post('http://192.249.18.213:80/face_classifier', formData)
-    // .then((res)=>JSON.stringify(res))
-    .then((res)=>{
-      console.log(res);
-      faceResult = res['data'];
-      console.log(faceResult);
-    })  
-
-  }
-  render() {
-    return (
-      <div>
-        <div>
-          <div>
-            <img src={this.state.image} />
-            <h1>Select Image</h1>
-            <input type="file" name="myImage" onChange={this.onImageChange} />
-            <button onClick={this.onClick}>Upload </button>
-          </div>
-        </div>
-      </div>
-    );
-  }
-}
-
-
-class InfoForm extends Component {
+class ChatForm extends Component {
   render() {
     return (
       <ThemeProvider theme={theme}>
-        <ChatBot id="chat"
+        <ChatBot
           botAvatar={chatbotimage}
           placeholder=""
           hideUserAvatar="True"
           enableSmoothScroll="True"
           customDelay= "50"
-          //avatarStyle={}
+          headerTitle="명탐정 세포"
+          avatarStyle={avatarStyle}
+          
         
           steps={[
+            {
+              id: '0',
+              message: '안녕 나는 명탐정 세포!!',
+              trigger: '18',
+            },
+            {
+              id: '18',
+              message: '너의 분위기를 분석해서 최고의 포토스팟을 찾아주고 있지',
+              trigger: '1',
+            },
             {
               id: '1',
               message: '이름이 뭐야?',
@@ -187,11 +104,11 @@ class InfoForm extends Component {
               id: 'name',
               user: true,
               trigger: '3',
-              placeholder:"이름을 입력해줘"
+              placeholder:"이름을 입력해주세요"
             },
             {
               id: '3',
-              message: '안녕 {previousValue}! 세포마을에 온걸 환영해! 성별은?',
+              message: '안녕 {previousValue}! 세포마을에 온 걸 환영해! 성별은?',
               trigger: 'gender',
             },
             {
@@ -199,7 +116,7 @@ class InfoForm extends Component {
               options: [
                 { value: '남자', label: '남자', trigger: '5' },
                 { value: '여자', label: '여자', trigger: '5' },
-              ],
+              ]
             },
             {
               id: '5',
@@ -210,7 +127,7 @@ class InfoForm extends Component {
               id: 'age',
               user: true,
               trigger: '7',
-              placeholder:"나이를 입력해줘",
+              placeholder:"나이를 입력해주세요",
               validator: (value) => {
                 if (isNaN(value)) {
                   return 'value must be a number';
@@ -281,19 +198,78 @@ class InfoForm extends Component {
             },
             {
               id: '9',
-              message: '좋았어! 이제 너의 얼굴을 보여주면 최고의 포토스팟을 찾아볼께!',
+              message: '좋았어! 이제 너의 얼굴을 보여주면 최고의 포토스팟을 찾아보지!',
               trigger: '10',
             },
             {
-                id: '10',
-                component:<FaceImageSend/>,
-                trigger: 'end-message',
+              id: '10',
+              component:<FaceImageSend />,
+              trigger: '19',
             },
             {
-              id: 'end-message',
-              message: 'hi',
-              end: true,
+              id: '19',
+              message: '이미지를 업로드하고 보내기 버튼을 눌러봐',
+              trigger: 'send',
             },
+            {
+              id: 'send',
+              user: true,
+              trigger: '11',
+              //placeholder:"이름을 입력해줘"
+            },
+            {
+              id: '11',
+              message: '얼굴형을 분석중이야',
+              trigger: '12',
+            },
+            {
+              id: '12',
+              message: '너의 얼굴형은 ooo이야',
+              trigger: '13',
+              delay: 5000
+            },
+            {
+              id: '13',
+              message: '이제 목소리를 들려줘!',
+              trigger: '14',
+            },
+            {
+              id: '14',
+              component:<VoiceSend/>,
+              trigger: '21',
+            },
+            {
+              id: '21',
+              message: '목소리를 업로드하고 보내기 버튼을 눌러봐',
+              trigger: 'sendvoice',
+            },
+            {
+              id: 'sendvoice',
+              user: true,
+              trigger: '15',
+              //placeholder:"이름을 입력해줘"
+            },
+            {
+              id: '15',
+              message: '목소리를 분석중이야',
+              trigger: '16',
+            },
+            {
+              id: '16',
+              message: '너만을 위한 포토스팟 분석을 완료했다!',
+              delay:5000,
+              trigger: '22',
+            },
+            {
+              id: '22',
+              message: '이제 확인하러 가볼까?',
+              end: true,
+            },/*
+            {
+              id: '23',
+              component: <resultButton/>,
+              end: true,
+            },*/
           ]}
         />
     </ThemeProvider>
@@ -301,4 +277,4 @@ class InfoForm extends Component {
   }
 }
 
-export default InfoForm;
+export default ChatForm;
