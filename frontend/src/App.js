@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import './App.css';
 import axios from 'axios';
+import ChatBot from 'react-simple-chatbot';
+
+
 function App() {
   const [img, setImage] = useState({});
   const onChange = (e) => {
@@ -13,13 +16,28 @@ function App() {
     const res = await axios.post('http://192.249.18.213:80/face_classifier', formData);
     console.log(res);
   }
+  const steps = [
+    {
+      id: '0',
+      message: 'Welcome to react chatbot!',
+      trigger: '1',
+    },
+    {
+      id: '1',
+      message: 'Bye!',
+      end: true,
+    },
+  ];
   return (
-    <div className="App">
+    /*<div className="App">
       <input type='file'
         accept='image/*'  
         onChange={onChange}>
       </input>
       <button onClick={onClick}>제출</button>
+    </div>*/
+    <div>
+      <ChatBot steps={steps} />
     </div>
   );
 }
