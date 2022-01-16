@@ -4,6 +4,8 @@ import axios from 'axios';
 import ChatBot from 'react-simple-chatbot';
 import InfoForm from './components/InfoForm';
 import './index.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Home from './Home';
 
 
 function App() {
@@ -38,10 +40,17 @@ function App() {
       </input>
       <button onClick={onClick}>제출</button>
     </div>*/
-    <div>
-      <ChatBot steps={steps} />
-      <InfoForm/>
-    </div>
+    
+    <BrowserRouter>
+        <Routes>
+          <Route exact path="/" element={<Home/>}></Route>
+        </Routes>
+    </BrowserRouter>  
+    
+    // <div>
+    //   <ChatBot steps={steps} />
+    //   <InfoForm/>
+    // </div>
   );
 }
 export default App;
