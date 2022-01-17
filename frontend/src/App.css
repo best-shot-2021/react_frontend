@@ -7,25 +7,32 @@
 }
 
 .Cell1 {
-  height: 21vmin;
+  height: 26vmin;
   width: 100;
+  padding: 20px;
+  padding-top: 55px;
   pointer-events: none;
 }
 
 .Cell2 {
-  height: 21vmin;
+  height: 24vmin;
   width: 100;
+  padding: 20px;
+  padding-top: 74px;
   pointer-events: none;
 }
 
 .Cell3 {
-  height: 25vmin;
+  height: 32vmin;
+  padding: 20px;
   width: 100;
   pointer-events: none;
 }
 
 .Cell4 {
-  height: 25vmin;
+  height: 32vmin;
+  padding: 20px;
+  padding-top: 25px;
   width: 100;
   pointer-events: none;
 }
@@ -45,21 +52,23 @@
 }
 
 .row {
-  padding-left: 100px;
+  padding-top: 170px;
+  padding-bottom: 90px;
+  padding-left: 50.5px;
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .Cell1 {
-    animation: Cell-rotate infinite 1s reverse;
+    animation: Cell-rotate infinite 1.1s reverse;
   }
   .Cell2 {
-    animation: Cell-rotate infinite 1s reverse;
+    animation: Cell-rotate infinite 1.1s reverse;
   }
   .Cell3 {
-    animation: Cell-rotate infinite 1s reverse;
+    animation: Cell-rotate infinite 1.1s reverse;
   }
   .Cell4 {
-    animation: Cell-rotate infinite 1s reverse;
+    animation: Cell-rotate infinite 1.1s reverse;
   }
 }
 
@@ -98,6 +107,7 @@
   color: none;
   background-color: rgba( 255, 255, 255, 0 );
   padding: 15px 32px;
+  padding-bottom: 100px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
