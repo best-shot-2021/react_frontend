@@ -36,7 +36,7 @@ const Home = () => {
 
           <Link to="/chat">
             <button class="chatbtn">
-              <img src= {btnimg} width="240">
+              <img src= {btnimg} width="210">
                 {/* <MdAdd /> */}
               </img>
             </button>
