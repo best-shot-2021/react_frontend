@@ -4,24 +4,35 @@ import styles from '../index.css'
 
 const cookies = new Cookies();
 
-var vocieEmo = cookies.get('voice_emo');
-var vocieMood = cookies.get('voice_mood');
 
-class VocieResult extends Component{
+class VoiceResult extends Component{
     constructor(props){
         super(props);
     }
     
+    state = {
+        voiceEmo: cookies.get('voice_emo'),
+        voiceMood: cookies.get('voice_mood'),
+    };
+    
     render() {
+        if(this.state.voiceEmo===null || this.state.voiceEmo===undefined){
+            console.log("cookie error");
+            this.setState({
+                voiceEmo: cookies.get('voice_emo'),
+                voiceMood: cookies.get('voice_mood'),
+            })
+        }
         return (
             <div style={{ width: '100%' }}>
                 <p></p>
-                <p>{vocieEmo}</p>
+                <p>{this.state.voiceEmo}</p>
                 <div>
-                    <b>{vocieMood}</b>이구나!
+                    <b>{this.state.voiceMood}</b>이구나!
                 </div>
+                <p></p>
             </div>
         );
     }
 }
-export default VocieResult;
+export default VoiceResult;

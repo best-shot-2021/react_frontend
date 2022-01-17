@@ -12,11 +12,10 @@ import imgA from '../assets/images/button.png';
 import AudioRecord from './AudioRecord';
 import Cookies from 'universal-cookie';
 import FaceResult from './FaceResult';
-import VocieResult from './VoiceResult';
+import VoiceResult from './VoiceResult';
 
 const cookies = new Cookies();
 
-var img_cookie = String(cookies.get('img'));
 
 class Review extends Component {
   constructor(props) {
@@ -83,6 +82,14 @@ class ResultButton extends Component{
 // class ChatForm extends Component {
 
 const ChatForm = () => {   
+  const [face, setFace] = useState("");
+
+  const setFaceFucn = (e) => {
+    setFace(e);
+  }
+  const getFaceFunc = () => {
+    return face;
+  }
     return (
       <ThemeProvider theme={theme}>
         <ChatBot
@@ -94,6 +101,7 @@ const ChatForm = () => {
           headerTitle="명탐정 세포"
           avatarStyle={avatarStyle}
           style={{}}
+          
           
         
           steps={[
@@ -216,7 +224,7 @@ const ChatForm = () => {
             },
             {
               id: '10',
-              component:<FaceImageSend />,
+              component:<FaceImageSend setFaceFunc = {setFaceFucn}/>,
               trigger: '19',
             },
             {
@@ -233,11 +241,13 @@ const ChatForm = () => {
             {
               id: '11',
               message: '얼굴형을 분석중이야',
+              // component: <FaceResultBefore />,
               trigger: '12',
             },
             {
               id: '12',
-              component: <FaceResult />,
+              component: <FaceResult
+              getFaceFunc = {getFaceFunc} />,
               asMessage: true,
               // message: '너의 얼굴형은 '+ img_cookie + '이야',
               trigger: '13',
@@ -278,7 +288,7 @@ const ChatForm = () => {
             // },
             {
               id: '24',
-              component:<VocieResult />,
+              component:<VoiceResult />,
               asMessage: true,
               trigger: '16',
             },

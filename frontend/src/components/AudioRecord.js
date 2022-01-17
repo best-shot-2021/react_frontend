@@ -125,9 +125,9 @@ const AudioRecord = (props) => {
           var voiceResult = (0).toString();
          }
 
-         cookies.set('vocie_emo', voiceEmo, {path: '/'});
-         cookies.set('vocie_mood', voiceMood, {path: '/'});
-         cookies.set('vocie', voiceResult, {path: '/'});
+         cookies.set('voice_emo', voiceEmo, {path: '/'});
+         cookies.set('voice_mood', voiceMood, {path: '/'});
+         cookies.set('voice', voiceResult, {path: '/'});
 
          console.log(cookies.get('voice_emo'));
          console.log(cookies.get('voice_mood'));
