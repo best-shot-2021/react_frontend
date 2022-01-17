@@ -15,6 +15,7 @@ import './App.css';
 
 const Home = () => {
   return (
+    
     <div className="Home1">
       <header className="Home1-header">
         <div class="row">
