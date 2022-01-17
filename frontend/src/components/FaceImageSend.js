@@ -57,8 +57,7 @@ class FaceImageSend extends Component {
         cookies.set('face_type', faceType, {path: '/'});
         cookies.set('face_msg', faceMsg, {path: '/'});
         cookies.set('face', faceResult, {path: '/'});
-        this.props.setFaceFunc(faceResult);
-        console.log(faceResult);
+
         console.log(cookies.get('face_type'));
         console.log(cookies.get('face_msg'));
         console.log(cookies.get('face'));        

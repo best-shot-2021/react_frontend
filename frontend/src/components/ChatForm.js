@@ -5,7 +5,6 @@ import { ThemeProvider } from 'styled-components';
 import '../index.css';
 import chatbotimage from '../assets/images/chatbot.png';
 import FaceImageSend from './FaceImageSend';
-import VoiceSend from './VoiceSend';
 import {theme, avatarStyle} from '../styles/theme'
 import { Link, Route, BrowserRouter as Router } from "react-router-dom";
 import imgA from '../assets/images/button.png';
