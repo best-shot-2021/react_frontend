@@ -1,15 +1,20 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import axios from "axios";
+import Cookies from 'universal-cookie';
 
-var voiceResult = null;
+const cookies = new Cookies();
 
-const AudioRecord = () => {
+var temp = null;
+
+const AudioRecord = (props) => {
+
   const [stream, setStream] = useState();
   const [media, setMedia] = useState();
   const [onRec, setOnRec] = useState(true);
   const [source, setSource] = useState();
   const [analyser, setAnalyser] = useState();
   const [audioUrl, setAudioUrl] = useState();
+
 
   const onRecAudio = () => {
     // 음원정보를 담은 노드를 생성하거나 음원을 실행또는 디코딩 시키는 일을 한다
@@ -75,7 +80,7 @@ const AudioRecord = () => {
     source.disconnect();
   };
 
-  const onSubmitAudioFile = useCallback(() => {
+  const onSubmitAudioFile = useCallback(async() => {
     if (audioUrl) {
       console.log(URL.createObjectURL(audioUrl)); // 출력된 링크에서 녹음된 오디오 확인 가능
     }
@@ -84,13 +89,48 @@ const AudioRecord = () => {
     console.log(sound); // File 정보 출력
 
     const formData = new FormData();
-      formData.append('voice_file', audioUrl);
-      axios.post('http://192.249.18.213:80/voice_analyzer', formData)
+
+    formData.append('voice_file', audioUrl);
+    await axios.post('http://192.249.18.213:80/voice_analyzer', formData)
       .then((res)=>{
         console.log(res);
-        voiceResult = res['data'];
-        console.log(voiceResult);
-      }) 
+        temp = res['data'];
+        console.log(typeof(temp)+ temp);
+
+        if(temp===0){
+          var voiceEmo = "지금 좀 흥분해있네";
+          var voiceMood = "발랄한 성격";
+          var voiceResult = (1).toString();
+         }
+         else if(temp===1){
+          var voiceEmo = "너 지금 되게 침착하다";
+          var voiceMood = "차분한 성격";
+          var voiceResult = (0).toString();
+         }
+         else if(temp===2){
+          var voiceEmo = "너 지금 좀 긴장해보이네";
+          var voiceMood = "차분한 성격";
+          var voiceResult = (0).toString();
+         }
+         else if(temp===3){
+          var voiceEmo = "너 지금 엄청 행복해보이네~";
+          var voiceMood = "발랄한 성격";
+          var voiceResult = (1).toString();
+         }
+         else if(temp===4){
+          var voiceEmo = "너 지금 생각에 잠겨있네";
+          var voiceMood = "차분한 성격";
+          var voiceResult = (0).toString();
+         }
+
+         cookies.set('voice_emo', voiceEmo, {path: '/'});
+         cookies.set('voice_mood', voiceMood, {path: '/'});
+         cookies.set('voice', voiceResult, {path: '/'});
+
+         console.log(cookies.get('voice_emo'));
+         console.log(cookies.get('voice_mood'));
+         console.log(cookies.get('voice'));
+      })
 
   }, [audioUrl]);
 
@@ -100,6 +140,5 @@ const AudioRecord = () => {
       <button onClick={onSubmitAudioFile}>결과 확인</button>
     </>
   );
-};
-
+}
 export default AudioRecord;

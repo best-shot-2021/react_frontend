@@ -2,6 +2,9 @@ import React, { Component} from 'react';
 import axios from 'axios';
 import styles from '../index.css'
 import { faceImageSend } from '../styles/theme';
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 var faceResult=null;
 
@@ -34,6 +37,30 @@ class FaceImageSend extends Component {
         console.log(res);
         faceResult = res['data'];
         console.log(faceResult);
+
+        if(faceResult===0){
+          var faceType = "각진형";
+          var faceMsg = "매력적인 귀족턱을 가졌네!";
+          var faceResult = (0).toString();
+        }
+        else if(faceResult===1){
+          var faceType = "하트형";
+          var faceMsg = "사랑스러운 하트형 얼굴이네!!";
+          var faceResult = (1).toString();
+        }
+        else if(faceResult===2){
+          var faceType = "계란형";
+          var faceMsg = "이상적인 계란형 얼굴을 가졌네!";
+          var faceResult = (2).toString();
+        }
+
+        cookies.set('face_type', faceType, {path: '/'});
+        cookies.set('face_msg', faceMsg, {path: '/'});
+        cookies.set('face', faceResult, {path: '/'});
+
+        console.log(cookies.get('face_type'));
+        console.log(cookies.get('face_msg'));
+        console.log(cookies.get('face'));        
       }) 
     }
     render() {

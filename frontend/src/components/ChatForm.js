@@ -1,19 +1,20 @@
-import React, { Component,  useState } from 'react';
+import React, { Component,  useEffect,  useState } from 'react';
 import PropTypes from 'prop-types';
 import ChatBot from 'react-simple-chatbot';
 import { ThemeProvider } from 'styled-components';
 import '../index.css';
 import chatbotimage from '../assets/images/chatbot.png';
 import FaceImageSend from './FaceImageSend';
-import VoiceSend from './VoiceSend';
 import {theme, avatarStyle} from '../styles/theme'
 import { Link, Route, BrowserRouter as Router } from "react-router-dom";
 import imgA from '../assets/images/button.png';
 import AudioRecord from './AudioRecord';
+import Cookies from 'universal-cookie';
+import FaceResult from './FaceResult';
+import VoiceResult from './VoiceResult';
 
-// all available props
+const cookies = new Cookies();
 
-var faceResult=null;
 
 class Review extends Component {
   constructor(props) {
@@ -58,7 +59,6 @@ class Review extends Component {
     );
   }
 }
-
 Review.propTypes = {
   steps: PropTypes.object,
 };
@@ -71,15 +71,24 @@ class ResultButton extends Component{
   render(){
     return (
       <div>
-        <img src={imgA} style={{width:200}}></img>
+        <img src={imgA} style={{width:240}}></img>
       </div>
     );
   }
 }
 
 
-class ChatForm extends Component {
-  render() {
+// class ChatForm extends Component {
+
+const ChatForm = () => {   
+  const [face, setFace] = useState("");
+
+  const setFaceFucn = (e) => {
+    setFace(e);
+  }
+  const getFaceFunc = () => {
+    return face;
+  }
     return (
       <ThemeProvider theme={theme}>
         <ChatBot
@@ -90,13 +99,15 @@ class ChatForm extends Component {
           customDelay= "50"
           headerTitle="명탐정 세포"
           avatarStyle={avatarStyle}
+          style={{}}
+          
           
         
           steps={[
             {
               id: '0',
               message: '안녕 나는 명탐정 세포!!',
-              trigger: '18',
+              trigger: '10',
             },
             {
               id: '18',
@@ -212,7 +223,7 @@ class ChatForm extends Component {
             },
             {
               id: '10',
-              component:<FaceImageSend />,
+              component:<FaceImageSend setFaceFunc = {setFaceFucn}/>,
               trigger: '19',
             },
             {
@@ -229,27 +240,26 @@ class ChatForm extends Component {
             {
               id: '11',
               message: '얼굴형을 분석중이야',
+              // component: <FaceResultBefore />,
               trigger: '12',
             },
             {
               id: '12',
-              message: '너의 얼굴형은 ooo이야',
+              component: <FaceResult
+              getFaceFunc = {getFaceFunc} />,
+              asMessage: true,
+              // message: '너의 얼굴형은 '+ img_cookie + '이야',
               trigger: '13',
-              delay: 5000
+              delay: 1000
             },
             {
               id: '13',
               message: '이제 목소리를 들려줘!',
               trigger: '14',
             },
-            // {
-            //   id: '14',
-            //   component:<VoiceSend/>,
-            //   trigger: '21',
-            // },
             {
               id: '14',
-              component:<AudioRecord/>,
+              component:<AudioRecord />,
               trigger: '21',
             },
             {
@@ -260,12 +270,25 @@ class ChatForm extends Component {
             {
               id: 'sendvoice',
               user: true,
+              delay:2000,
               trigger: '15',
               //placeholder:"이름을 입력해줘"
             },
             {
               id: '15',
               message: '목소리를 분석중이야',
+              delay:2000,
+              trigger: '24',
+            },
+            // {
+            //   id: '24',
+            //   message: '너의 목소리는 '+voice+ ' 편인걸!',
+            //   trigger: '16',
+            // },
+            {
+              id: '24',
+              component:<VoiceResult />,
+              asMessage: true,
               trigger: '16',
             },
             {
@@ -289,6 +312,6 @@ class ChatForm extends Component {
     </ThemeProvider>
     );
   }
-}
+
 
 export default ChatForm;
