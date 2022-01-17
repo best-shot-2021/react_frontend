@@ -10,12 +10,8 @@
     "install": "^0.13.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-<<<<<<< HEAD
     "react-image-uploader": "^1.0.0",
-=======
-    "react-images-uploader": "^1.2.0-rc1",
-    "react-progress-button": "^5.1.0",
->>>>>>> e382194cb27bfb0aef72392620b98337ab0667eb
+    "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
     "react-simple-chatbot": "^0.6.1",
     "styled-components": "^5.3.3",
