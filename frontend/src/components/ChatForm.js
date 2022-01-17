@@ -1,4 +1,4 @@
-import React, { Component,  useState } from 'react';
+import React, { Component,  useEffect,  useState } from 'react';
 import PropTypes from 'prop-types';
 import ChatBot from 'react-simple-chatbot';
 import { ThemeProvider } from 'styled-components';
@@ -13,7 +13,6 @@ import AudioRecord from './AudioRecord';
 
 // all available props
 
-var faceResult=null;
 
 class Review extends Component {
   constructor(props) {
@@ -59,6 +58,83 @@ class Review extends Component {
   }
 }
 
+
+class VoiceTest extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      vr: '',
+    };
+  }
+
+  componentWillMount() {
+    const { steps } = this.props;
+    const { vr } = steps.temp;
+
+    this.setState({ vr });
+  }
+
+  render() {
+    const { vr } = this.state;
+    return (
+      <div style={{ width: '100%' }}>
+        <h3>분석노트</h3>
+        <table>
+          <tbody>
+            <tr>
+              <td>목소리 : </td>
+              <td>{vr.value}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    );
+  }
+}
+
+// const VoiceTest =(props)=>{
+//   super(props);
+//   console.log("voicetest temp::::::::"+props.temp);
+
+//   const [voice, setVoice] = useState();
+//   //const [temp, setTemp] = useState();
+
+//   // const highFunction = (voiceResult) =>{
+//   //   setTemp(voiceResult);
+//   // }
+
+//   console.log("함수 밖 voice::::::::::::::::"+voice);
+
+//   useEffect(()=>{
+//    // highFunction(); 
+//     temptest(props.temp);
+//   }, [props]);
+
+//   const temptest = async(temp) => {
+//     if(temp ==="0"){
+//       setVoice( "차분한" );
+//     }
+//     else if(temp=="1"){
+//       setVoice( "발랄한" );
+//     }
+//     console.log(voice);
+//   }
+//   return (
+//     <div style={{ width: '100%' }}>
+//       <h3>분석노트</h3>
+//       <table>
+//         <tbody>
+//           <tr>
+//             <td>결과 : </td>
+//             <td>{voice}</td>
+//           </tr>
+//         </tbody>
+//       </table>
+//     </div>
+//   );
+// }
+
 Review.propTypes = {
   steps: PropTypes.object,
 };
@@ -71,15 +147,42 @@ class ResultButton extends Component{
   render(){
     return (
       <div>
-        <img src={imgA} style={{width:200}}></img>
+        <img src={imgA} style={{width:240}}></img>
       </div>
     );
   }
 }
 
 
-class ChatForm extends Component {
-  render() {
+// class ChatForm extends Component {
+
+const ChatForm = () => {
+    const [voice, setVoice] = useState();
+    const [temp, setTemp] = useState();
+
+    const highFunction = (voiceResult) =>{
+      setTemp(voiceResult);
+    }
+
+    console.log("temp test::::::::::::::::"+temp);
+
+    console.log("함수 밖 voice::::::::::::::::"+voice);
+
+    useEffect(()=>{
+      highFunction(); 
+      temptest(temp);
+  }, [temp]);
+
+    const temptest = async(temp) => {
+      if(temp ==="0"){
+       setVoice( "차분한" );
+      }
+      else if(temp=="1"){
+       setVoice( "발랄한" );
+      }
+      console.log(voice);
+     }
+   
     return (
       <ThemeProvider theme={theme}>
         <ChatBot
@@ -90,6 +193,7 @@ class ChatForm extends Component {
           customDelay= "50"
           headerTitle="명탐정 세포"
           avatarStyle={avatarStyle}
+          style={{}}
           
         
           steps={[
@@ -242,14 +346,9 @@ class ChatForm extends Component {
               message: '이제 목소리를 들려줘!',
               trigger: '14',
             },
-            // {
-            //   id: '14',
-            //   component:<VoiceSend/>,
-            //   trigger: '21',
-            // },
             {
               id: '14',
-              component:<AudioRecord/>,
+              component:<AudioRecord propFunction={highFunction}/>,
               trigger: '21',
             },
             {
@@ -266,6 +365,18 @@ class ChatForm extends Component {
             {
               id: '15',
               message: '목소리를 분석중이야',
+              trigger: '24',
+            },
+            // {
+            //   id: '24',
+            //   message: '너의 목소리는 '+voice+ ' 편인걸!',
+            //   trigger: '16',
+            // },
+            {
+              id: '24',
+              // component:<VoiceTest temp={temp}/>,
+              component:<VoiceTest />,
+              asMessage: true,
               trigger: '16',
             },
             {
@@ -289,6 +400,6 @@ class ChatForm extends Component {
     </ThemeProvider>
     );
   }
-}
+
 
 export default ChatForm;

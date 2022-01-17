@@ -1,15 +1,18 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import axios from "axios";
 
-var voiceResult = null;
+var v = null;
 
-const AudioRecord = () => {
+const AudioRecord = (props) => {
+
   const [stream, setStream] = useState();
   const [media, setMedia] = useState();
   const [onRec, setOnRec] = useState(true);
   const [source, setSource] = useState();
   const [analyser, setAnalyser] = useState();
   const [audioUrl, setAudioUrl] = useState();
+
+  const [voiceResult, setVoiceResult] = useState({voiceResult:String});
 
   const onRecAudio = () => {
     // 음원정보를 담은 노드를 생성하거나 음원을 실행또는 디코딩 시키는 일을 한다
@@ -75,7 +78,7 @@ const AudioRecord = () => {
     source.disconnect();
   };
 
-  const onSubmitAudioFile = useCallback(() => {
+  const onSubmitAudioFile = useCallback(async() => {
     if (audioUrl) {
       console.log(URL.createObjectURL(audioUrl)); // 출력된 링크에서 녹음된 오디오 확인 가능
     }
@@ -84,15 +87,39 @@ const AudioRecord = () => {
     console.log(sound); // File 정보 출력
 
     const formData = new FormData();
-      formData.append('voice_file', audioUrl);
-      axios.post('http://192.249.18.213:80/voice_analyzer', formData)
+
+    formData.append('voice_file', audioUrl);
+    await axios.post('http://192.249.18.213:80/voice_analyzer', formData)
       .then((res)=>{
         console.log(res);
-        voiceResult = res['data'];
-        console.log(voiceResult);
+
+
+        var temp = res['data'];
+        console.log("하위 컴포넌트 temp data:::::::::::::::::"+temp);
+        console.log("하위 컴포넌트 temp data:::::::::::::::::"+typeof(temp));
+        return (temp)})
+      .then((temp)=>{
+
+        v = temp.toString();
+        console.log("V::::::::::::::::::::"+v);
+
+        setVoiceResult(v);
+
+        console.log("하위 컴포넌트 setVoiceResult::::::::::::"+ voiceResult);
+        props.propFunction(voiceResult);
       }) 
 
   }, [audioUrl]);
+
+
+
+  useEffect(()=>{ 
+    setVoiceResult(v);
+    console.log("하위 컴포넌트 setVoiceResult::::::::::::"+ voiceResult);
+
+    props.propFunction(voiceResult);
+}, [v]);
+
 
   return (
     <>
