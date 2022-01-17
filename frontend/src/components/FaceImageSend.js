@@ -40,6 +40,7 @@ class FaceImageSend extends Component {
       return (
             <div style={{ textAlign:'center'}}>
               <img src={this.state.image} style={{width:225}} />
+              
               <div style={{marginTop:10}}>
                 <label className='select-file-button' for="select-file">이곳을 클릭해서 사진을 가져오세요</label>
                 <input type="file" name="Image" id="select-file" onChange={this.onImageChange} style={{fontFamily:'GodoM', display:"none"}} />

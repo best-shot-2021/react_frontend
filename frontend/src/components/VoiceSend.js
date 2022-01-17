@@ -1,7 +1,7 @@
 import React, { Component} from 'react';
 import axios from 'axios';
 
-var faceResult=null;
+var voiceResult=null;
 
 class VoiceSend extends Component {
     constructor(props) {
@@ -17,10 +17,14 @@ class VoiceSend extends Component {
     onVoiceChange = event => {
       if (event.target.files && event.target.files[0]) {
         let voice = event.target.files[0];
+        let send_voice = null;
+        
         this.setState({
           voice: URL.createObjectURL(voice),
           send_voice: voice
         });
+        console.log(voice);
+        console.log(send_voice);
       }
     };
   
@@ -30,17 +34,17 @@ class VoiceSend extends Component {
       axios.post('http://192.249.18.213:80/voice_analyzer', formData)
       .then((res)=>{
         console.log(res);
-        faceResult = res['data'];
-        console.log(faceResult);
+        voiceResult = res['data'];
+        console.log(voiceResult);
       }) 
     }
     render() {
       return (
             <div>
-              <label className='select-file-button' for="select-file">파일 선택</label>
-              <input type="file" name="voice" id="select-file" onChange={this.onVoiceChange} style={{display:"none"}}/>
+              {/* <label className='select-file-button' for="select-file">파일 선택</label> */}
+              <input type="file" name="voice" id="select-file" onChange={this.onVoiceChange}/>
               
-              <button className='upload-file-button' onClick={this.onClick}> 업로드 </button>
+              <button onClick={this.onClick}> 업로드 </button>
             </div>
       );
     }

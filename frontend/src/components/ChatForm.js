@@ -7,6 +7,9 @@ import chatbotimage from '../assets/images/chatbot.png';
 import FaceImageSend from './FaceImageSend';
 import VoiceSend from './VoiceSend';
 import {theme, avatarStyle} from '../styles/theme'
+import { Link, Route, BrowserRouter as Router } from "react-router-dom";
+import imgA from '../assets/images/button.png';
+import AudioRecord from './AudioRecord';
 
 // all available props
 
@@ -65,7 +68,13 @@ Review.defaultProps = {
 };
 
 class ResultButton extends Component{
-
+  render(){
+    return (
+      <div>
+        <img src={imgA} style={{width:200}}></img>
+      </div>
+    );
+  }
 }
 
 
@@ -233,9 +242,14 @@ class ChatForm extends Component {
               message: '이제 목소리를 들려줘!',
               trigger: '14',
             },
+            // {
+            //   id: '14',
+            //   component:<VoiceSend/>,
+            //   trigger: '21',
+            // },
             {
               id: '14',
-              component:<VoiceSend/>,
+              component:<AudioRecord/>,
               trigger: '21',
             },
             {
@@ -263,13 +277,13 @@ class ChatForm extends Component {
             {
               id: '22',
               message: '이제 확인하러 가볼까?',
-              end: true,
-            },/*
+              trigger: '23',
+            },
             {
               id: '23',
-              component: <resultButton/>,
+              component: <ResultButton/>,
               end: true,
-            },*/
+            },
           ]}
         />
     </ThemeProvider>
