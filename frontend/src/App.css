@@ -6,17 +6,94 @@
   color: #4499D7;
 }
 
-.Background {
+/* .Background {
   height: 100vmin;
   width: 100;
   pointer-events: none;
+} */
+
+.Cell1 {
+  height: 34.7vmin;
+  width: 10;
+  pointer-events: none;
+  padding: 30px;
+  padding-top: 83px;
 }
 
-/* @media (prefers-reduced-motion: no-preference) {
-  .Background {
-    animation: Background-spin infinite 20s linear;
+.Cell2 {
+  height: 27vmin;
+  width: 10;
+  pointer-events: none;
+  padding: 30px;
+  padding-left: 35px;
+  padding-top: 120px;
+}
+
+.Cell3 {
+  height: 40vmin;
+  width: 10;
+  pointer-events: none;
+  padding: 30px;
+}
+
+.Cell4 {
+  height: 40vmin;
+  width: 10;
+  pointer-events: none;
+  padding: 30px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .Cell1 {
+    animation: Cell-spin infinite alternate 1.8s;
   }
-} */
+  .Cell2 {
+    animation: Cell-spin infinite alternate 1.8s;
+  }
+  .Cell3 {
+    animation: Cell-spin infinite alternate 1.8s;
+  }
+  .Cell4 {
+    animation: Cell-spin infinite alternate 1.8s;
+  }
+}
+
+.column {
+  float: left;
+  width: 20%;
+  padding: 10px;
+}
+
+/* Clear floats after image containers */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.row {
+  padding-left: 100px;
+  padding-top: 140px;
+  padding-bottom: 38px;
+}
+
+@keyframes Cell-spin {
+  from {
+    transform: rotate(-3.5deg);
+  }
+  to {
+    transform: rotate(3.5deg);
+  }
+}
+
+@keyframes Cell-spin-reverse {
+  from {
+    transform: rotate(3.5deg);
+  }
+  to {
+    transform: rotate(-3.5deg);
+  }
+}
 
 .Home1-header {
   /* background-image: url("./assets/images/yumi_insta.png"); */
@@ -39,20 +116,14 @@
   color: #4499D7;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+
 
 .chatbtn {
   border: none;
   color: none;
   background-color: rgba( 255, 255, 255, 0 );
   padding: 15px 32px;
+  padding-bottom: 60px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
