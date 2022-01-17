@@ -71,7 +71,7 @@ class ResultButton extends Component{
   render(){
     return (
       <div>
-        <img src={imgA} style={{width:240}}></img>
+        <img src={imgA} style={{width:200}}></img>
       </div>
     );
   }
@@ -225,6 +225,7 @@ const ChatForm = () => {
               id: '10',
               component:<FaceImageSend setFaceFunc = {setFaceFucn}/>,
               trigger: '19',
+              asMessage: true,
             },
             {
               id: '19',
@@ -259,6 +260,7 @@ const ChatForm = () => {
             },
             {
               id: '14',
+              asMessage: true,
               component:<AudioRecord />,
               trigger: '21',
             },
@@ -280,17 +282,19 @@ const ChatForm = () => {
               delay:2000,
               trigger: '24',
             },
-            // {
-            //   id: '24',
-            //   message: '너의 목소리는 '+voice+ ' 편인걸!',
-            //   trigger: '16',
-            // },
             {
               id: '24',
               component:<VoiceResult />,
               asMessage: true,
               trigger: '16',
             },
+            // {
+            //   id: '24',
+            //   // component:<VoiceTest temp={temp}/>,
+            //   component:<VoiceTest />,
+            //   asMessage: true,
+            //   trigger: '16',
+            // },
             {
               id: '16',
               message: '너만을 위한 포토스팟 분석을 완료했다!',
@@ -305,6 +309,7 @@ const ChatForm = () => {
             {
               id: '23',
               component: <ResultButton/>,
+              
               end: true,
             },
           ]}

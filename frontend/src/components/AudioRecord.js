@@ -15,7 +15,6 @@ const AudioRecord = (props) => {
   const [analyser, setAnalyser] = useState();
   const [audioUrl, setAudioUrl] = useState();
 
-
   const onRecAudio = () => {
     // 음원정보를 담은 노드를 생성하거나 음원을 실행또는 디코딩 시키는 일을 한다
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();

@@ -66,10 +66,10 @@ class FaceImageSend extends Component {
     render() {
       return (
             <div style={{ textAlign:'center'}}>
-              <img src={this.state.image} style={{width:225}} />
+              <img src={this.state.image} style={{width:170, borderRadius: '5px'}} />
               
               <div style={{marginTop:10}}>
-                <label className='select-file-button' for="select-file">이곳을 클릭해서 사진을 가져오세요</label>
+                <label className='select-file-button' for="select-file">사진 가져오기</label>
                 <input type="file" name="Image" id="select-file" onChange={this.onImageChange} style={{fontFamily:'GodoM', display:"none"}} />
                 
                 <div class="wrap">

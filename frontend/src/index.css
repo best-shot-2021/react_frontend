@@ -17,7 +17,7 @@ code {
 .select-file-button{
   font-size: small;
   padding: 6px 25px;
-  background-color:white;
+  /* background-color: ; */
   border-radius: 4px;
   color: #6f6f6f;
   cursor: pointer;
