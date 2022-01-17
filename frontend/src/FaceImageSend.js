@@ -1,7 +1,7 @@
 import React, { Component} from 'react';
 import axios from 'axios';
-import styles from '../index.css'
-import { faceImageSend } from '../styles/theme';
+import styles from './index.css'
+import { faceImageSend } from './styles/theme';
 
 var faceResult=null;
 
