@@ -1,7 +1,5 @@
 import React, { Component} from 'react';
 import axios from 'axios';
-import styles from './index.css'
-import { faceImageSend } from './styles/theme';
 
 var faceResult=null;
 
@@ -39,7 +37,7 @@ class FaceImageSend extends Component {
     render() {
       return (
             <div style={{ textAlign:'center'}}>
-              <img src={this.state.image} style={{width:225}} />
+              <img src={this.state.image} style={{width:225}} alt="img1" />
               
               <div style={{marginTop:10}}>
                 <label className='select-file-button' for="select-file">이곳을 클릭해서 사진을 가져오세요</label>

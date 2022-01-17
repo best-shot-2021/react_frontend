@@ -1,20 +1,15 @@
-import React, { Component,  useState } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ChatBot from 'react-simple-chatbot';
 import { ThemeProvider } from 'styled-components';
 import './index.css';
 import chatbotimage from './assets/images/chatbot.png';
 import FaceImageSend from './FaceImageSend';
-import VoiceSend from './VoiceSend';
 import {theme, avatarStyle} from './styles/theme'
-import { Link, Route, BrowserRouter as Router } from "react-router-dom";
 import imgA from './assets/images/button.png';
 import AudioRecord from './AudioRecord';
 
 // all available props
-
-var faceResult=null;
-
 class Review extends Component {
   constructor(props) {
     super(props);
@@ -71,7 +66,7 @@ class ResultButton extends Component{
   render(){
     return (
       <div>
-        <img src={imgA} style={{width:200}}></img>
+        <img src={imgA} style={{width:200}} alt="img3"></img>
       </div>
     );
   }

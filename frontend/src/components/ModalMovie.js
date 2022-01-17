@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 // import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import Button from '@mui/material/Button';
 
 const style = {
   position: 'absolute',
@@ -24,6 +25,7 @@ export default function ModalMovie() {
 
   return (
     <div>
+      <Button onClick={handleOpen}>Add Star Wars Movie</Button>
       <Modal
         open={open}
         onClose={handleClose}

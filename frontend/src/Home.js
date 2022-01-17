@@ -1,10 +1,6 @@
 // Home.js
 import React from 'react';
-import img from './assets/images/cells2.png';
 import { Link } from 'react-router-dom';
-import ImageButton from 'react-image-button';
-import imgButton from './assets/images/logo.svg';
-import {MdAdd} from 'react-icons/md';
 import btnimg from './assets/images/btnimg1.png';
 import cell1 from './assets/images/new_cell1.png';
 import cell2 from './assets/images/new_cell2.png';
@@ -37,7 +33,7 @@ const Home = () => {
 
           <Link to="/chat">
             <button class="chatbtn">
-              <img src= {btnimg} width="210">
+              <img src= {btnimg} width="210" alt="btn">
                 {/* <MdAdd /> */}
               </img>
             </button>

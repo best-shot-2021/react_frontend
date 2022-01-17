@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import './App.css';
 import './index.css';
 import { BrowserRouter, Route, Routes} from 'react-router-dom';
@@ -6,6 +6,7 @@ import Home from './Home';
 import About from './About';
 import Chat from './Chat';
 import Result from './Result';
+import React from "react";
 
 function App() {
   return (
