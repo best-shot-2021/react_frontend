@@ -59,39 +59,39 @@ class Review extends Component {
 }
 
 
-class VoiceTest extends Component {
-  constructor(props) {
-    super(props);
+// class VoiceTest extends Component {
+//   constructor(props) {
+//     super(props);
 
-    this.state = {
-      vr: '',
-    };
-  }
+//     this.state = {
+//       vr: '',
+//     };
+//   }
 
-  componentWillMount() {
-    const { steps } = this.props;
-    const { vr } = steps.temp;
+//   componentWillMount() {
+//     const { steps } = this.props;
+//     const { vr } = steps.temp;
 
-    this.setState({ vr });
-  }
+//     this.setState({ vr });
+//   }
 
-  render() {
-    const { vr } = this.state;
-    return (
-      <div style={{ width: '100%' }}>
-        <h3>분석노트</h3>
-        <table>
-          <tbody>
-            <tr>
-              <td>목소리 : </td>
-              <td>{vr.value}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    );
-  }
-}
+//   render() {
+//     const { vr } = this.state;
+//     return (
+//       <div style={{ width: '100%' }}>
+//         <h3>분석노트</h3>
+//         <table>
+//           <tbody>
+//             <tr>
+//               <td>목소리 : </td>
+//               <td>{vr.value}</td>
+//             </tr>
+//           </tbody>
+//         </table>
+//       </div>
+//     );
+//   }
+// }
 
 // const VoiceTest =(props)=>{
 //   super(props);
@@ -147,7 +147,7 @@ class ResultButton extends Component{
   render(){
     return (
       <div>
-        <img src={imgA} style={{width:240}}></img>
+        <img src={imgA} style={{width:200}}></img>
       </div>
     );
   }
@@ -318,6 +318,7 @@ const ChatForm = () => {
               id: '10',
               component:<FaceImageSend />,
               trigger: '19',
+              asMessage: true,
             },
             {
               id: '19',
@@ -349,6 +350,7 @@ const ChatForm = () => {
             {
               id: '14',
               component:<AudioRecord propFunction={highFunction}/>,
+              asMessage: true,
               trigger: '21',
             },
             {
@@ -367,18 +369,18 @@ const ChatForm = () => {
               message: '목소리를 분석중이야',
               trigger: '24',
             },
-            // {
-            //   id: '24',
-            //   message: '너의 목소리는 '+voice+ ' 편인걸!',
-            //   trigger: '16',
-            // },
             {
               id: '24',
-              // component:<VoiceTest temp={temp}/>,
-              component:<VoiceTest />,
-              asMessage: true,
+              message: '너의 목소리는 '+'보이스한'+ ' 편인걸!',
               trigger: '16',
             },
+            // {
+            //   id: '24',
+            //   // component:<VoiceTest temp={temp}/>,
+            //   component:<VoiceTest />,
+            //   asMessage: true,
+            //   trigger: '16',
+            // },
             {
               id: '16',
               message: '너만을 위한 포토스팟 분석을 완료했다!',
@@ -393,6 +395,7 @@ const ChatForm = () => {
             {
               id: '23',
               component: <ResultButton/>,
+              
               end: true,
             },
           ]}

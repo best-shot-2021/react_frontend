@@ -12,6 +12,7 @@ const AudioRecord = (props) => {
   const [analyser, setAnalyser] = useState();
   const [audioUrl, setAudioUrl] = useState();
 
+  //const [voiceResult, setVoiceResult] = useState({voiceResult:String});
   const [voiceResult, setVoiceResult] = useState({voiceResult:String});
 
   const onRecAudio = () => {
