@@ -1,6 +1,3 @@
-// About.js
-import {motion} from 'framer-motion';
-import './App.css';
 import React, {useState, useEffect} from "react";
 import "./styles.css";
 import Navbar from "./components/Navbar";
@@ -25,17 +22,17 @@ export default function Result() {
       }, [])
       return (
         <>
-          <StarfieldAnimation
+          <StarfieldAnimation lineWidth = {2.0} numParticles = {130} alphaFactor = {0.35}
             style={{
               position: 'absolute',
               width: '100%',
-              height: '350%'
+              height: '350%',
             }}
           />
           <Navbar />
           <ModalMovie />
           
-          <div className="App">
+          <div className="Result">
             <Movies movies={movies}/>
           </div>
         </>

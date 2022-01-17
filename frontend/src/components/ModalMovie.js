@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
+// import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 
@@ -24,7 +24,6 @@ export default function ModalMovie() {
 
   return (
     <div>
-      <Button onClick={handleOpen}>Add Star Wars Movie</Button>
       <Modal
         open={open}
         onClose={handleClose}
