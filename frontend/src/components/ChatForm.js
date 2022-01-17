@@ -10,9 +10,13 @@ import {theme, avatarStyle} from '../styles/theme'
 import { Link, Route, BrowserRouter as Router } from "react-router-dom";
 import imgA from '../assets/images/button.png';
 import AudioRecord from './AudioRecord';
+import Cookies from 'universal-cookie';
+import FaceResult from './FaceResult';
+import VocieResult from './VoiceResult';
 
-// all available props
+const cookies = new Cookies();
 
+var img_cookie = String(cookies.get('img'));
 
 class Review extends Component {
   constructor(props) {
@@ -57,84 +61,6 @@ class Review extends Component {
     );
   }
 }
-
-
-class VoiceTest extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      vr: '',
-    };
-  }
-
-  componentWillMount() {
-    const { steps } = this.props;
-    const { vr } = steps.temp;
-
-    this.setState({ vr });
-  }
-
-  render() {
-    const { vr } = this.state;
-    return (
-      <div style={{ width: '100%' }}>
-        <h3>분석노트</h3>
-        <table>
-          <tbody>
-            <tr>
-              <td>목소리 : </td>
-              <td>{vr.value}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    );
-  }
-}
-
-// const VoiceTest =(props)=>{
-//   super(props);
-//   console.log("voicetest temp::::::::"+props.temp);
-
-//   const [voice, setVoice] = useState();
-//   //const [temp, setTemp] = useState();
-
-//   // const highFunction = (voiceResult) =>{
-//   //   setTemp(voiceResult);
-//   // }
-
-//   console.log("함수 밖 voice::::::::::::::::"+voice);
-
-//   useEffect(()=>{
-//    // highFunction(); 
-//     temptest(props.temp);
-//   }, [props]);
-
-//   const temptest = async(temp) => {
-//     if(temp ==="0"){
-//       setVoice( "차분한" );
-//     }
-//     else if(temp=="1"){
-//       setVoice( "발랄한" );
-//     }
-//     console.log(voice);
-//   }
-//   return (
-//     <div style={{ width: '100%' }}>
-//       <h3>분석노트</h3>
-//       <table>
-//         <tbody>
-//           <tr>
-//             <td>결과 : </td>
-//             <td>{voice}</td>
-//           </tr>
-//         </tbody>
-//       </table>
-//     </div>
-//   );
-// }
-
 Review.propTypes = {
   steps: PropTypes.object,
 };
@@ -156,33 +82,7 @@ class ResultButton extends Component{
 
 // class ChatForm extends Component {
 
-const ChatForm = () => {
-    const [voice, setVoice] = useState();
-    const [temp, setTemp] = useState();
-
-    const highFunction = (voiceResult) =>{
-      setTemp(voiceResult);
-    }
-
-    console.log("temp test::::::::::::::::"+temp);
-
-    console.log("함수 밖 voice::::::::::::::::"+voice);
-
-    useEffect(()=>{
-      highFunction(); 
-      temptest(temp);
-  }, [temp]);
-
-    const temptest = async(temp) => {
-      if(temp ==="0"){
-       setVoice( "차분한" );
-      }
-      else if(temp=="1"){
-       setVoice( "발랄한" );
-      }
-      console.log(voice);
-     }
-   
+const ChatForm = () => {   
     return (
       <ThemeProvider theme={theme}>
         <ChatBot
@@ -200,7 +100,7 @@ const ChatForm = () => {
             {
               id: '0',
               message: '안녕 나는 명탐정 세포!!',
-              trigger: '18',
+              trigger: '10',
             },
             {
               id: '18',
@@ -337,9 +237,11 @@ const ChatForm = () => {
             },
             {
               id: '12',
-              message: '너의 얼굴형은 ooo이야',
+              component: <FaceResult />,
+              asMessage: true,
+              // message: '너의 얼굴형은 '+ img_cookie + '이야',
               trigger: '13',
-              delay: 5000
+              delay: 1000
             },
             {
               id: '13',
@@ -348,7 +250,7 @@ const ChatForm = () => {
             },
             {
               id: '14',
-              component:<AudioRecord propFunction={highFunction}/>,
+              component:<AudioRecord />,
               trigger: '21',
             },
             {
@@ -359,12 +261,14 @@ const ChatForm = () => {
             {
               id: 'sendvoice',
               user: true,
+              delay:2000,
               trigger: '15',
               //placeholder:"이름을 입력해줘"
             },
             {
               id: '15',
               message: '목소리를 분석중이야',
+              delay:2000,
               trigger: '24',
             },
             // {
@@ -374,8 +278,7 @@ const ChatForm = () => {
             // },
             {
               id: '24',
-              // component:<VoiceTest temp={temp}/>,
-              component:<VoiceTest />,
+              component:<VocieResult />,
               asMessage: true,
               trigger: '16',
             },
