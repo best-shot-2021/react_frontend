@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import './Result.css';
 import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
 
 const style = {
@@ -19,38 +20,15 @@ const style = {
 };
 
 export default function ModalOpening(props) {
-  const {name} = props;
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  const mangoPlate = () => window.Open('http://www.mangoplate.com/restaurants/KwNMtQdIxa','_blank');
-  const {
-    button: buttonStyles
-  } = useBlogTextInfoContentStyles();
-  
+ 
+
   return (
-    
     <div>
-      <Button sx={{ mt: 2, color: '#fff' }} className={buttonStyles}>
-        <a target="_blank" href="http://www.mangoplate.com/restaurants/KwNMtQdIxa">
+      <Button sx={{ mt: 2, color: '#fff' }} >
+        <a  className="rs" target="_blank" href="http://www.mangoplate.com/restaurants/-iUuwF93iCve">
           가게 정보 보기
         </a>
       </Button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h2" component="h2" sx={{ color: '#43a5cf'}}>
-            A long time ago in a galaxy far, far away...
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 5}}>
-            {name}
-          </Typography>
-        </Box>
-      </Modal>
     </div>
   );
 }
