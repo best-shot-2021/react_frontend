@@ -9,8 +9,10 @@ import './index.css';
 function App() {
   
   return (
-    <div>
-      <ChatForm/>
+    <div class="chat_layer">
+      <div class="chat_layer_inner">
+        <ChatForm />
+      </div>
     </div>
   );
 }

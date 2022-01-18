@@ -78,5 +78,37 @@ code {
   margin-left: 52px;
 
 }
+.chat_layer{
+  width: 100%;
+  height: 963px;
+  text-align: center;
+  background-image: url('./assets/images/background_chat.png');
+  
+}
 
+.chat_layer_inner{
+  display: inline-block;
+  width: 50%;
+
+
+}
+
+.chat_box{
+  display: inline-block;
+}
+
+.hc{
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.vc{
+  top:0;
+  bottom:0;
+  margin-left: auto;
+  margin-right: auto;
+
+}
 

@@ -12,6 +12,8 @@ import AudioRecord from './AudioRecord';
 import Cookies from 'universal-cookie';
 import FaceResult from './FaceResult';
 import VoiceResult from './VoiceResult';
+import title_chat from '../assets/images/title_chat.png';
+import { ToastContainer } from 'react-toastify';
 
 const cookies = new Cookies();
 
@@ -38,7 +40,7 @@ class Review extends Component {
     const { name, gender, age } = this.state;
     return (
       <div style={{ width: '100%' }}>
-        <h3>분석노트</h3>
+        <h3>의뢰노트</h3>
         <table>
           <tbody>
             <tr>
@@ -90,7 +92,9 @@ const ChatForm = () => {
     return face;
   }
     return (
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme} >
+        <img src={title_chat} style={{width:350, marginTop:200}}></img>
+        <ToastContainer/>
         <ChatBot
           botAvatar={chatbotimage}
           placeholder=""
@@ -99,7 +103,9 @@ const ChatForm = () => {
           customDelay= "50"
           headerTitle="명탐정 세포"
           avatarStyle={avatarStyle}
-          style={{}}
+          // style={{margin:'auto', marginLeft: '30px', marginTop: '360px', width: '600px'}}
+          style={{margin:'auto', marginLeft: '30px', width: '600px'}}
+          
           
           
         
@@ -107,11 +113,16 @@ const ChatForm = () => {
             {
               id: '0',
               message: '안녕 나는 명탐정 세포!!',
-              trigger: '10',
+              trigger: '14',
             },
             {
               id: '18',
-              message: '너의 분위기를 분석해서 최고의 포토스팟을 찾아주고 있지',
+              message: '너의 분위기를 분석해서',
+              trigger: '26',
+            },
+            {
+              id: '26',
+              message: '최고의 포토스팟을 찾아주고 있지',
               trigger: '1',
             },
             {
@@ -218,7 +229,12 @@ const ChatForm = () => {
             },
             {
               id: '9',
-              message: '좋았어! 이제 너의 얼굴을 보여주면 최고의 포토스팟을 찾아보지!',
+              message: '좋았어! 이제 너의 얼굴을 보여주면',
+              trigger: '25',
+            },
+            {
+              id: '25',
+              message: '너에게 딱맞는 최고의 포토스팟을 찾아보지!',
               trigger: '10',
             },
             {

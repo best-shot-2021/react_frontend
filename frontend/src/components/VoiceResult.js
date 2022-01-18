@@ -37,13 +37,13 @@ class VoiceResult extends Component{
     }
 
     render() {
-        if(this.state.voiceEmo===null || this.state.voiceEmo===undefined){
-            console.log("cookie error");
-            this.setState({
-                voiceEmo: cookies.get('voice_emo'),
-                voiceMood: cookies.get('voice_mood'),
-            })
-        }  
+        // if(this.state.voiceEmo===null || this.state.voiceEmo===undefined){
+        //     console.log("cookie error");
+            // this.setState({
+            //     voiceEmo: cookies.get('voice_emo'),
+            //     voiceMood: cookies.get('voice_mood'),
+            // })
+        // }  
         
         return (
             <div style={{ width: '100%' }}>
