@@ -1,15 +1,23 @@
-import React, { Component } from 'react';
+import React, { Component,  useEffect,  useState } from 'react';
 import PropTypes from 'prop-types';
 import ChatBot from 'react-simple-chatbot';
 import { ThemeProvider } from 'styled-components';
-import './index.css';
-import chatbotimage from './assets/images/chatbot.png';
+import '../index.css';
+import chatbotimage from '../assets/images/chatbot.png';
 import FaceImageSend from './FaceImageSend';
-import {theme, avatarStyle} from './styles/theme'
-import imgA from './assets/images/button.png';
+import {theme, avatarStyle} from '../styles/theme'
+import { Link, Route, BrowserRouter as Router } from "react-router-dom";
+import imgA from '../assets/images/button.png';
 import AudioRecord from './AudioRecord';
+import Cookies from 'universal-cookie';
+import FaceResult from './FaceResult';
+import VoiceResult from './VoiceResult';
+import title_chat from '../assets/images/title_chat.png';
+import { ToastContainer } from 'react-toastify';
 
-// all available props
+const cookies = new Cookies();
+
+
 class Review extends Component {
   constructor(props) {
     super(props);
@@ -32,7 +40,7 @@ class Review extends Component {
     const { name, gender, age } = this.state;
     return (
       <div style={{ width: '100%' }}>
-        <h3>분석노트</h3>
+        <h3>의뢰노트</h3>
         <table>
           <tbody>
             <tr>
@@ -53,7 +61,6 @@ class Review extends Component {
     );
   }
 }
-
 Review.propTypes = {
   steps: PropTypes.object,
 };
@@ -66,17 +73,28 @@ class ResultButton extends Component{
   render(){
     return (
       <div>
-        <img src={imgA} style={{width:200}} alt="img3"></img>
+        <img src={imgA} style={{width:200}}></img>
       </div>
     );
   }
 }
 
 
-class ChatForm extends Component {
-  render() {
+// class ChatForm extends Component {
+
+const ChatForm = () => {   
+  const [face, setFace] = useState("");
+
+  const setFaceFucn = (e) => {
+    setFace(e);
+  }
+  const getFaceFunc = () => {
+    return face;
+  }
     return (
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme} >
+        <img src={title_chat} style={{width:350, marginTop:200}}></img>
+        <ToastContainer/>
         <ChatBot
           botAvatar={chatbotimage}
           placeholder=""
@@ -85,17 +103,26 @@ class ChatForm extends Component {
           customDelay= "50"
           headerTitle="명탐정 세포"
           avatarStyle={avatarStyle}
+          // style={{margin:'auto', marginLeft: '30px', marginTop: '360px', width: '600px'}}
+          style={{margin:'auto', marginLeft: '30px', width: '600px'}}
+          
+          
           
         
           steps={[
             {
               id: '0',
               message: '안녕 나는 명탐정 세포!!',
-              trigger: '18',
+              trigger: '14',
             },
             {
               id: '18',
-              message: '너의 분위기를 분석해서 최고의 포토스팟을 찾아주고 있지',
+              message: '너의 분위기를 분석해서',
+              trigger: '26',
+            },
+            {
+              id: '26',
+              message: '최고의 포토스팟을 찾아주고 있지',
               trigger: '1',
             },
             {
@@ -202,13 +229,19 @@ class ChatForm extends Component {
             },
             {
               id: '9',
-              message: '좋았어! 이제 너의 얼굴을 보여주면 최고의 포토스팟을 찾아보지!',
+              message: '좋았어! 이제 너의 얼굴을 보여주면',
+              trigger: '25',
+            },
+            {
+              id: '25',
+              message: '너에게 딱맞는 최고의 포토스팟을 찾아보지!',
               trigger: '10',
             },
             {
               id: '10',
-              component:<FaceImageSend />,
+              component:<FaceImageSend setFaceFunc = {setFaceFucn}/>,
               trigger: '19',
+              asMessage: true,
             },
             {
               id: '19',
@@ -224,27 +257,27 @@ class ChatForm extends Component {
             {
               id: '11',
               message: '얼굴형을 분석중이야',
+              // component: <FaceResultBefore />,
               trigger: '12',
             },
             {
               id: '12',
-              message: '너의 얼굴형은 ooo이야',
+              component: <FaceResult
+              getFaceFunc = {getFaceFunc} />,
+              asMessage: true,
+              // message: '너의 얼굴형은 '+ img_cookie + '이야',
               trigger: '13',
-              delay: 5000
+              delay: 1000
             },
             {
               id: '13',
               message: '이제 목소리를 들려줘!',
               trigger: '14',
             },
-            // {
-            //   id: '14',
-            //   component:<VoiceSend/>,
-            //   trigger: '21',
-            // },
             {
               id: '14',
-              component:<AudioRecord/>,
+              asMessage: true,
+              component:<AudioRecord />,
               trigger: '21',
             },
             {
@@ -255,14 +288,29 @@ class ChatForm extends Component {
             {
               id: 'sendvoice',
               user: true,
+              delay:2000,
               trigger: '15',
               //placeholder:"이름을 입력해줘"
             },
             {
               id: '15',
               message: '목소리를 분석중이야',
+              delay:2000,
+              trigger: '24',
+            },
+            {
+              id: '24',
+              component:<VoiceResult />,
+              asMessage: true,
               trigger: '16',
             },
+            // {
+            //   id: '24',
+            //   // component:<VoiceTest temp={temp}/>,
+            //   component:<VoiceTest />,
+            //   asMessage: true,
+            //   trigger: '16',
+            // },
             {
               id: '16',
               message: '너만을 위한 포토스팟 분석을 완료했다!',
@@ -277,6 +325,7 @@ class ChatForm extends Component {
             {
               id: '23',
               component: <ResultButton/>,
+              
               end: true,
             },
           ]}
@@ -284,6 +333,6 @@ class ChatForm extends Component {
     </ThemeProvider>
     );
   }
-}
+
 
 export default ChatForm;
