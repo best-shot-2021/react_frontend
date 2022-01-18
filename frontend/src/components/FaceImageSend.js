@@ -3,6 +3,8 @@ import axios from 'axios';
 import styles from '../index.css'
 import { faceImageSend } from '../styles/theme';
 import Cookies from 'universal-cookie';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const cookies = new Cookies();
 
@@ -30,6 +32,7 @@ class FaceImageSend extends Component {
     };
   
     onClick = async() => {
+      toast("업로드 중!");
       const formData = new FormData();
       formData.append('img_file', this.state.send_image);
       axios.post('http://192.249.18.213:80/face_classifier', formData)
@@ -69,12 +72,14 @@ class FaceImageSend extends Component {
               <img src={this.state.image} style={{width:170, borderRadius: '5px'}} />
               
               <div style={{marginTop:10}}>
+                <div style={{marginBottom :10}}>
                 <label className='select-file-button' for="select-file">사진 가져오기</label>
                 <input type="file" name="Image" id="select-file" onChange={this.onImageChange} style={{fontFamily:'GodoM', display:"none"}} />
-                
+                </div>
                 <div class="wrap">
                     <button class="button" onClick={this.onClick}>upload </button>
                 </div>
+                {/* <ToastContainer style={{width:170}}/> */}
               </div>
              
             </div>

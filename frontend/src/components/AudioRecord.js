@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
 import axios from "axios";
 import Cookies from 'universal-cookie';
+import { toast, ToastContainer } from "react-toastify";
 
 const cookies = new Cookies();
 
@@ -16,6 +17,7 @@ const AudioRecord = (props) => {
   const [audioUrl, setAudioUrl] = useState();
 
   const onRecAudio = () => {
+    toast("녹음시작!");
     // 음원정보를 담은 노드를 생성하거나 음원을 실행또는 디코딩 시키는 일을 한다
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     // 자바스크립트를 통해 음원의 진행상태에 직접접근에 사용된다.
@@ -61,6 +63,7 @@ const AudioRecord = (props) => {
 
   // 사용자가 음성 녹음을 중지했을 때
   const offRecAudio = () => {
+    toast("녹음완료!");
     // dataavailable 이벤트로 Blob 데이터에 대한 응답을 받을 수 있음
     media.ondataavailable = function (e) {
       setAudioUrl(e.data);
@@ -83,6 +86,7 @@ const AudioRecord = (props) => {
     if (audioUrl) {
       console.log(URL.createObjectURL(audioUrl)); // 출력된 링크에서 녹음된 오디오 확인 가능
     }
+    toast("녹음 파일 업로드중!");
     // File 생성자를 사용해 파일로 변환
     const sound = new File([audioUrl], "soundBlob", { lastModified: new Date().getTime(), type: "audio" });
     console.log(sound); // File 정보 출력
@@ -135,7 +139,7 @@ const AudioRecord = (props) => {
 
   return (
     <>
-      <button onClick={onRec ? onRecAudio : offRecAudio}>녹음</button>
+      <button onClick={onRec ? onRecAudio : offRecAudio} style={{fontFamily:'GodoM'}}>REC</button>
       <button onClick={onSubmitAudioFile}>결과 확인</button>
     </>
   );
