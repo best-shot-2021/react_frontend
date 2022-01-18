@@ -78,7 +78,9 @@ class ResultButton extends Component{
     render() {
       return (
         <div style={{ width: '100%' }}>
-          <img src={result_button} style={{width:300}} onClick={onclick}></img>
+          <Link to="/result">
+            <img src={result_button} style={{width:300}} onClick={onclick}></img>
+          </Link>
         </div>
     );
   }
@@ -311,13 +313,6 @@ const ChatForm = () => {
                 asMessage: true,
                 trigger: '16',
               },
-              // {
-              //   id: '24',
-              //   // component:<VoiceTest temp={temp}/>,
-              //   component:<VoiceTest />,
-              //   asMessage: true,
-              //   trigger: '16',
-              // },
               {
                 id: '16',
                 message: '너만을 위한 포토스팟 분석을 완료했다!',
