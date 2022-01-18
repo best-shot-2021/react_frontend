@@ -6,6 +6,7 @@ import cell1 from './assets/images/new_cell1.png';
 import cell2 from './assets/images/new_cell2.png';
 import cell3 from './assets/images/new_cell3.png';
 import cell4 from './assets/images/new_cell4.png';
+import main_title from './assets/images/main_title.png';
 import './App.css';
 //import styled, { ThemeProvider } from "styled-components";
 
@@ -14,6 +15,10 @@ const Home = () => {
     
     <div className="Home1">
       <header className="Home1-header">
+        <div style={{marginTop: '100px'}}>
+        <img src={main_title} style={{width:'500px'}}></img>
+
+        </div>
         <div class="row">
           <div class="column">
             <img src={cell1} className="Cell1" alt="logo1" />
@@ -29,16 +34,16 @@ const Home = () => {
           </div>
         </div>
 
-        <ul>
+        <div>
 
           <Link to="/chat">
             <button class="chatbtn">
-              <img src= {btnimg} width="210" alt="btn">
+              <img src= {btnimg} width="400" alt="btn">
                 {/* <MdAdd /> */}
               </img>
             </button>
           </Link>
-      </ul>
+      </div>
       </header>
       
     </div>
