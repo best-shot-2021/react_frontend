@@ -1,0 +1,36 @@
+.rName{
+    margin: 0;
+    padding: 0;
+    color: white;
+    font-family: 'GodoM';
+    letter-spacing: 2px;
+    list-style-type: none;
+    text-decoration: none;
+    padding-bottom: 17px;
+}
+
+.rAddress{
+    margin: 0;
+    padding: 0;
+    color: white;
+    font-family: 'GodoM';
+    letter-spacing: 2px;
+    list-style-type: none;
+    text-decoration: none;
+    padding-bottom: 20px;
+}
+
+.rs{
+    margin: 0;
+    padding: 0;
+    color: white;
+    background-color: #F6CD62;
+    font-family: 'GodoM';
+    letter-spacing: 2px;
+    padding: 7px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border-radius: 10px;
+    list-style-type: none;
+    text-decoration: none;
+}

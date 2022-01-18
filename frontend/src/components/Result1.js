@@ -8,8 +8,60 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
 import Typography from '@mui/material/Typography';
-import ModalOpening from "../components/ModalOpening"
-import "./Component.css";
+import ModalOpening from "./ModalOpening"
+import "./Result.css";
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
+var result = cookies.get('final_result');
+console.log(result);
+console.log(typeof(result));
+
+var name = "";
+var address = "";
+var imgurl = "";
+var mango="";
+
+switch(result) {
+  case "0":
+    name = "랑골로(이탈리안)";
+    mango="http://www.mangoplate.com/restaurants/T4szR6Xoe4";
+    address="	대전광역시 유성구 엑스포로151번길 19";
+    imgurl="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcCW34c%2Fbtrq22ziMAA%2FyzbnIJOqQ6uZwiwkL6ES20%2Fimg.jpg";
+    break;
+  case "1":
+    name = "어화(이자카야)";
+    mango="http://www.mangoplate.com/restaurants/KwNMtQdIxa";
+    address="대전광역시 유성구 온천서로 55";
+    imgurl="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbVHtoJ%2Fbtrq22ziMMb%2FqhCVkAbPxOdm8dY91zxJ70%2Fimg.jpg";
+    break;
+  case "2":
+    name = "모루(브런치)";
+    mango="http://www.mangoplate.com/restaurants/dwWsVUszIE";
+    address="	대전광역시 서구 둔산남로9번길 33";
+    imgurl="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FdS5Vea%2Fbtrq4q0Wyaf%2FyAuj1cTnwLFmR67VOUEfQ1%2Fimg.jpg";
+    break;
+  case "3":
+    name = "우디룸(카페)";
+    mango="http://www.mangoplate.com/restaurants/-iUuwF93iCve";
+    address="대전광역시 유성구 어은로48번길 19 1F";
+    imgurl="";
+    break;
+  case "4":
+    name = "치앙마이방콕(태국)";
+    mango="http://www.mangoplate.com/restaurants/wX1NWg5qHmev";
+    address="대전광역시 동구 철갑3길 8";
+    imgurl="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcLb2wu%2Fbtrq6O7wAkC%2F5YPG1gDYG3rIJPm5JRWxJ0%2Fimg.jpg";
+    break;
+  case "5":
+    name = "FAKE(카페)";
+    mango="http://www.mangoplate.com/restaurants/8DNBDk5wu9Te";
+    address="대전광역시 중구 중교로 30 승촌빌딩";
+    imgurl="";
+    break;
+}
+
+
 
 const useStyles = makeStyles(({ breakpoints, spacing }) => ({
   button: {
@@ -68,9 +120,8 @@ const useStyles = makeStyles(({ breakpoints, spacing }) => ({
 }));
 
 
-const Movies = (props) => {
+const Result1 = (props) => {
 const styles = useStyles();
-
 
   const shadowStyles = useOverShadowStyles();
 
@@ -82,15 +133,15 @@ const styles = useStyles();
       <CardMedia
         className={styles.media}
         image={
-          'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fb4OUxA%2Fbtrq4wZGuG0%2FiAZS3xCZQFghABnrco5511%2Fimg.jpg'
+          'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FdS5Vea%2Fbtrq4q0Wyaf%2FyAuj1cTnwLFmR67VOUEfQ1%2Fimg.jpg'
         }
       />
       <CardContent>
         <div className = "rName">
-          어화(이자카야)
+          {name}
         </div>
         <div className = "rAddress" >
-          대전광역시 유성구 온천서로 55
+          {address}
         </div>
         <ModalOpening name="restaurantBtn"/>
       </CardContent>
@@ -100,4 +151,4 @@ const styles = useStyles();
    )
 }
 
-export default Movies;
+export default Result1;

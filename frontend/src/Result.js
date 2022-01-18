@@ -1,26 +1,18 @@
 import React, {useState, useEffect} from "react";
 import "./styles.css";
 import Navbar from "./components/Navbar";
-import Movies from "./components/Movies";
+import Result1 from "./components/Result1";
 import ModalMovie from "./components/ModalMovie";
 import {getMovies} from "./api";
 import StarfieldAnimation from 'react-starfield-animation';
+import './components/Result.css';
+
+
 
 
 export default function Result() {
   const [movies, setMovies] = useState([]);
 
-  const fetchMovies = async () =>{
-    try {
-      const data = await getMovies();
-      setMovies(data.results)
-    }catch(e){
-    }
-  }
-    
-  useEffect(()=>{
-    fetchMovies();
-  }, [])
   return (
     <>
       <StarfieldAnimation lineWidth = {2.0} numParticles = {130} alphaFactor = {0.35}
@@ -35,7 +27,7 @@ export default function Result() {
       
 
       <div className="Result">
-        <Movies movies={movies}/>
+        <Result1/>
       </div>
     </>
   )
