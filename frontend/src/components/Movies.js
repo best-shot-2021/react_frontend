@@ -9,6 +9,7 @@ import CardContent from '@material-ui/core/CardContent';
 import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
 import Typography from '@mui/material/Typography';
 import ModalOpening from "../components/ModalOpening"
+import "./Component.css";
 
 const useStyles = makeStyles(({ breakpoints, spacing }) => ({
   button: {
@@ -24,7 +25,7 @@ const useStyles = makeStyles(({ breakpoints, spacing }) => ({
     maxWidth: 550,
     marginLeft: 'auto',
     overflow: 'initial',
-    background: '#e5e5e5',
+    background: '#00A0FE',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -76,34 +77,23 @@ const styles = useStyles();
    return (
      <div>
      {
-       movies.map((movie, idx)=> {
-         let myDate = new Date(movie.release_date + 'T00:00');
-         let year = myDate.getFullYear();
-         
-          return(
-            <div key={movie.episode_id}>
       <Card className={cx(styles.root, shadowStyles.root)}>
       <CardMedia
         className={styles.media}
         image={
-          'https://wallpaperaccess.com/full/1602769.jpg'
+          'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fb4OUxA%2Fbtrq4wZGuG0%2FiAZS3xCZQFghABnrco5511%2Fimg.jpg'
         }
       />
       <CardContent>
         <Typography mr={13} gutterBottom variant="h5" component="div">
-            {movie.title}
+            Test
           </Typography>
           <Typography pb={3} variant="body2" color="text.secondary">
-            {movie.director} ({
-              myDate.toDateString().split(' ').slice(1, -1).join(' ').concat(', '+year)
-              })
+            hi (yes)
           </Typography>
-        <ModalOpening name={movie.opening_crawl}/>
+        <ModalOpening name="sanakang"/>
       </CardContent>
     </Card>
-            </div>
-          )
-       })
      }
      </div>
    )

@@ -24,6 +24,7 @@ export default function ModalOpening(props) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const mangoPlate = () => window.Open('http://www.mangoplate.com/restaurants/KwNMtQdIxa','_blank');
    const {
     button: buttonStyles
   } = useBlogTextInfoContentStyles();
@@ -31,7 +32,11 @@ export default function ModalOpening(props) {
   return (
     
     <div>
-      <Button sx={{ mt: 2, color: '#fff' }} className={buttonStyles} onClick={handleOpen}>See opening</Button>
+      <Button sx={{ mt: 2, color: '#fff' }} className={buttonStyles}>
+        <a target="_blank" href="http://www.mangoplate.com/restaurants/KwNMtQdIxa">
+          가게 정보 보기
+        </a>
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}

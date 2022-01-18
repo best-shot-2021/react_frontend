@@ -25,7 +25,7 @@ export default function ModalMovie() {
 
   return (
     <div>
-      <Button onClick={handleOpen}>Add Star Wars Movie</Button>
+      {/* <Button onClick={handleOpen}>Add Star Wars Movie</Button> */}
       <Modal
         open={open}
         onClose={handleClose}
