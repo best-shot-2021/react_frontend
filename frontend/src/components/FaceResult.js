@@ -13,13 +13,13 @@ class FaceResult extends Component{
         faceMsg: cookies.get('face_msg'),
     };
     render() {
-        if(this.state.faceType===null || this.state.faceType===undefined){
-            console.log("cookie error");
-            this.setState({
-                faceType: cookies.get('face_type'),
-                faceMsg: cookies.get('face_msg'),    
-            })
-        }
+        // if(this.state.faceType===null || this.state.faceType===undefined){
+        //     console.log("cookie error");
+        //     this.setState({
+        //         faceType: cookies.get('face_type'),
+        //         faceMsg: cookies.get('face_msg'),    
+        //     })
+        // }
         return (
             <div style={{ width: '100%' }}>
                 <p></p>

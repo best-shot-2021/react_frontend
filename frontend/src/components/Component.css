@@ -1,0 +1,24 @@
+.resultLogo {
+    padding-top: 100px;
+    width: 550px;
+  }
+
+.Card {
+  padding-top: 100px;
+}
+
+.rName {
+  font-size: 30px;
+  padding-bottom: 12px;
+}
+
+.rAddress {
+  font-size: 15px;
+  padding-bottom: 20px;
+}
+
+.buttonStyles {
+  color: white;
+  padding-top: 100px;
+  width: 550px;
+}
