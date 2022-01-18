@@ -12,13 +12,11 @@ import React from "react";
 
 function App() {
   return (
-    <div className="App">
-      <Routes>
-        <Route path="/" element={<Home/>} />
-        <Route path="/chat" element={<Chat/>} />
-        <Route path="/result" element={<Result/>} />
-      </Routes>
-    </div>     
+    <Routes>
+      <Route path="/" element={<Home/>} />
+      <Route path="/chat" element={<Chat/>} />
+      <Route path="/result" element={<Result/>} />
+    </Routes>
   );
 }
 export default App;
