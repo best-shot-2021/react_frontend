@@ -15,8 +15,8 @@ const Home = () => {
     
     <div className="Home1">
       <header className="Home1-header">
-        <div style={{marginTop: '100px'}}>
-        <img src={main_title} style={{width:'500px'}}></img>
+        <div style={{marginTop: '15px'}}>
+        <img src={main_title} style={{width:'300px'}}></img>
 
         </div>
         <div class="row">
@@ -38,7 +38,7 @@ const Home = () => {
 
           <Link to="/chat">
             <button class="chatbtn">
-              <img src= {btnimg} width="400" alt="btn">
+              <img src= {btnimg} width="200" alt="btn">
                 {/* <MdAdd /> */}
               </img>
             </button>
