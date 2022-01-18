@@ -2,6 +2,8 @@ import React, { useState, useCallback, useEffect } from "react";
 import axios from "axios";
 import Cookies from 'universal-cookie';
 import { toast, ToastContainer } from "react-toastify";
+import record_img from '../assets/images/record.png';
+import send_img from '../assets/images/send.png'
 
 const cookies = new Cookies();
 
@@ -139,8 +141,10 @@ const AudioRecord = (props) => {
 
   return (
     <>
-      <button onClick={onRec ? onRecAudio : offRecAudio} style={{fontFamily:'GodoM'}}>REC</button>
-      <button onClick={onSubmitAudioFile}>결과 확인</button>
+      <img src={record_img} style={{width:50, marginRight:10}} onClick={onRec ? onRecAudio : offRecAudio}></img>
+      <img src={send_img} style={{width:50, marginRight:10}} onClick={onSubmitAudioFile}></img>
+      {/* <button onClick={onRec ? onRecAudio : offRecAudio} style={{fontFamily:'GodoM'}}>REC</button> */}
+      {/* <button onClick={onSubmitAudioFile}>결과 확인</button> */}
     </>
   );
 }
