@@ -72,9 +72,9 @@
 }
 
 .row {
-  padding-top: 170px;
+  padding-top: 20px;
   padding-bottom: 60px;
-  padding-left: 49.5px;
+  /* padding-left: 49.5px; */
 }
 
 @media (prefers-reduced-motion: no-preference) {
