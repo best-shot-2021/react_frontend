@@ -101,3 +101,69 @@ li span.active::before{
 .order p{
   margin: 20px auto;
 }
+.select-file-button{
+  font-size: small;
+  padding: 6px 25px;
+  background-color:white;
+  border-radius: 4px;
+  color: #6f6f6f;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.upload-file-button{
+  font-size: small;
+  padding: 6px 25px;
+  background-color:#00a0fe;
+  border-radius: 10px;
+  color: #000000;
+  cursor: pointer;
+  margin: 5px;
+  font-family: 'GodoM';
+}
+
+
+
+.wrap {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button {
+  width: 100px;
+  height: 35px;
+  font-family: 'GodoM';
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  }
+
+.button:hover {
+  background-color: #00a0fe;
+  box-shadow: 0px 15px 20px rgba(30, 199, 255, 0.4);
+  color: #fff;
+  transform: translateY(-20px);
+}
+
+
+.sc-bwzfXH jKLQUD rsc-cs{
+  background: #00a0fe;
+  justify-content: flex-start;
+  box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px 0px;
+  padding: 1px;
+  margin-left: 52px;
+
+}
+
+
