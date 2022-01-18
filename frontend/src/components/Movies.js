@@ -25,7 +25,8 @@ const useStyles = makeStyles(({ breakpoints, spacing }) => ({
     maxWidth: 550,
     marginLeft: 'auto',
     overflow: 'initial',
-    background: '#00A0FE',
+    // background: '#00A0FE',
+    background: 'linear-gradient(#0098fe, #79ccfe)',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -75,7 +76,7 @@ const styles = useStyles();
 
   const {movies} = props;
    return (
-     <div>
+     <div className = "Card">
      {
       <Card className={cx(styles.root, shadowStyles.root)}>
       <CardMedia
@@ -85,13 +86,13 @@ const styles = useStyles();
         }
       />
       <CardContent>
-        <Typography mr={13} gutterBottom variant="h5" component="div">
-            Test
-          </Typography>
-          <Typography pb={3} variant="body2" color="text.secondary">
-            hi (yes)
-          </Typography>
-        <ModalOpening name="sanakang"/>
+        <div className = "rName">
+          어화(이자카야)
+        </div>
+        <div className = "rAddress" >
+          대전광역시 유성구 온천서로 55
+        </div>
+        <ModalOpening name="restaurantBtn"/>
       </CardContent>
     </Card>
      }

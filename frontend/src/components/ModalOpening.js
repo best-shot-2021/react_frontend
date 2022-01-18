@@ -5,7 +5,6 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
 
-
 const style = {
   position: 'absolute',
   top: '50%',
@@ -25,7 +24,7 @@ export default function ModalOpening(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const mangoPlate = () => window.Open('http://www.mangoplate.com/restaurants/KwNMtQdIxa','_blank');
-   const {
+  const {
     button: buttonStyles
   } = useBlogTextInfoContentStyles();
   
