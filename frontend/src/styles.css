@@ -1,0 +1,19 @@
+nav {
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Roboto", Times, serif;
+  flex-direction: column;
+}
+.logo {
+  width: 200px;
+}
+
+body {
+  background: #000;
+  color: white;
+}
+.navlogo{
+  margin-left: 10px;
+}
